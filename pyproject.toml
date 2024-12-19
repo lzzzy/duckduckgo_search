@@ -1,74 +1,24 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
-[project]
+[tool.poetry]
 name = "duckduckgo_search"
+version = "0.1.0"
 description = "Search for words, documents, images, news, maps and text translation using the DuckDuckGo.com search engine."
-readme = "README.md"
-requires-python = ">=3.8"
-license = {text = "MIT License"}
-keywords = ["python", "duckduckgo"]
-authors = [
-  {name = "deedy5"}
-]
-classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: Implementation :: CPython",
-    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-]
-dependencies = [
-    "click>=8.1.7",
-    "primp>=0.8.1",
-]
-dynamic = ["version"]
+authors = ["deedy5"]
 
-[project.urls]  # Optional
-"Homepage" = "https://github.com/deedy5/duckduckgo_search"
+[tool.poetry.dependencies]
+python = ">=3.8"
+click = ">=8.1.7"
+primp = ">=0.8.1"
+lxml = ">=5.2.2"
 
-[project.scripts]
-ddgs = "duckduckgo_search.cli:safe_entry_point"
+[tool.poetry.dev-dependencies]
+mypy = ">=1.11.1"
+pytest = ">=8.3.1"
+pytest-asyncio = ">=0.23.8"
+ruff = ">=0.6.1"
 
-[tool.setuptools.dynamic]
-version = {attr = "duckduckgo_search.version.__version__"}
+[tool.poetry.extras]
+xml-parser = ["lxml"]
 
-[project.optional-dependencies]
-lxml = [
-    "lxml>=5.2.2",
-]
-dev = [
-    "mypy>=1.11.1",
-    "pytest>=8.3.1",
-    "pytest-asyncio>=0.23.8",
-    "ruff>=0.6.1",
-]
-
-[tool.ruff]
-line-length = 120
-exclude = ["tests"]
-
-[tool.ruff.lint]
-select = [
-    "E",  # pycodestyle
-    "F",  # Pyflakes
-    "UP",  # pyupgrade
-    "B",  # flake8-bugbear
-    "SIM",  # flake8-simplify
-    "I",  # isort
-]
-
-[tool.mypy]
-python_version = "3.8"
-strict = true
-exclude = ['cli\.py$', '__main__\.py$', "tests/", "build/"]
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
